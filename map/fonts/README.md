@@ -1,9 +1,7 @@
-# Noto unicode font for OpenStreetMap & MapBox GL
+# Simple world view for fonts
 
-Manually merged Google Noto fonts (https://www.google.com/get/noto/) to provide glyphs for unicode OpenStreetMap labels in TileServer GL, MapBox GL JS, Android and iOS.
+The different styles use a lot of the same fonts; this is the Roboto Noto fonts from https://github.com/openmaptiles/fonts (and Google)
 
-Feel free to use these fonts in your styles on your servers, but you must keep the name of the font as it is in this repository - to credit KlokanTech for the work we have done on merging the Google Noto.
+Rather than having a full suite of fonts only the three most used fonts are included. There's also "Compressed Italic" but for simplicity's sake the styles uses just the "Italic" font.
 
-Bugs should be reported under [Issues](https://github.com/klokantech/klokantech-gl-fonts/issues) in this repository.
 
-TrueType variant of the fonts for use in MapBox Studio or on desktop can be downloaded too: https://github.com/klokantech/klokantech-gl-fonts/releases/download/v1.0.0/ttf.zip
