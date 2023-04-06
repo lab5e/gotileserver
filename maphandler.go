@@ -36,12 +36,10 @@ func main() {
 // RegisterHandler registers handlers for the /map path in the mux. Since the styles and spec files require
 // a fair bit of massaging to work. Omit the trailing slash for the hostname (ie. "http://localhost")
 func RegisterHandler(mux *http.ServeMux, hostName string) {
-
 	mux.HandleFunc("/map/index.html", static("text/html", indexPage))
 	mux.HandleFunc("/map/tiles/", tileHandler)
 	mux.Handle("/map/fonts/", http.FileServer(http.FS(fonts)))
 	mux.Handle("/map/styles/", http.FileServer(http.FS(styles)))
-
 }
 
 func static(c string, v []byte) func(w http.ResponseWriter, r *http.Request) {
