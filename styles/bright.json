@@ -51,7 +51,7 @@
             "url": "http://localhost/spec.json"
         }
     },
-    "sprite": "https://openmaptiles.github.io/osm-bright-gl-style/sprite",
+    "sprite": "http://localhost/sprites/bright/sprite",
     "glyphs": "http://localhost/fonts/{fontstack}/{range}.pbf",
     "layers": [
         {
@@ -4479,7 +4479,7 @@
                 "symbol-spacing": 350,
                 "text-field": "{name:latin} {name:nonlatin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Italic"
+                    "Italic"
                 ],
                 "text-letter-spacing": 0.2,
                 "text-max-width": 5,
@@ -4507,7 +4507,7 @@
                 "symbol-spacing": 350,
                 "text-field": "{name:latin}\n{name:nonlatin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Italic"
+                    "Italic"
                 ],
                 "text-letter-spacing": 0.2,
                 "text-max-width": 5,
@@ -4543,7 +4543,7 @@
                 "symbol-spacing": 350,
                 "text-field": "{name:latin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Italic"
+                    "Italic"
                 ],
                 "text-letter-spacing": 0.2,
                 "text-max-width": 5,
@@ -4579,7 +4579,7 @@
                 "symbol-spacing": 350,
                 "text-field": "{name:latin}\n{name:nonlatin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Italic"
+                    "Italic"
                 ],
                 "text-letter-spacing": 0.2,
                 "text-max-width": 5,
@@ -4640,7 +4640,7 @@
                 "text-anchor": "top",
                 "text-field": "{name:latin}\n{name:nonlatin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Regular"
+                    "Regular"
                 ],
                 "text-max-width": 9,
                 "text-offset": [
@@ -4699,7 +4699,7 @@
                 "text-anchor": "top",
                 "text-field": "{name:latin}\n{name:nonlatin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Regular"
+                    "Regular"
                 ],
                 "text-max-width": 9,
                 "text-offset": [
@@ -4757,7 +4757,7 @@
                 "text-anchor": "top",
                 "text-field": "{name:latin}\n{name:nonlatin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Regular"
+                    "Regular"
                 ],
                 "text-max-width": 9,
                 "text-offset": [
@@ -4812,7 +4812,7 @@
                 "text-anchor": "top",
                 "text-field": "{name:latin}\n{name:nonlatin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Regular"
+                    "Regular"
                 ],
                 "text-ignore-placement": false,
                 "text-max-width": 9,
@@ -4944,7 +4944,7 @@
                 "symbol-placement": "line",
                 "text-field": "{name:latin} {name:nonlatin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Regular"
+                    "Regular"
                 ],
                 "text-rotation-alignment": "map",
                 "text-size": {
@@ -4992,7 +4992,7 @@
                 "symbol-placement": "line",
                 "text-field": "{name:latin} {name:nonlatin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Regular"
+                    "Regular"
                 ],
                 "text-rotation-alignment": "map",
                 "text-size": {
@@ -5033,7 +5033,7 @@
                 "symbol-placement": "line",
                 "text-field": "{name:latin} {name:nonlatin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Regular"
+                    "Regular"
                 ],
                 "text-rotation-alignment": "map",
                 "text-size": {
@@ -5102,7 +5102,7 @@
                 "symbol-spacing": 200,
                 "text-field": "{ref}",
                 "text-font": [
-                    "KlokanTech Noto Sans Regular"
+                    "Regular"
                 ],
                 "text-rotation-alignment": "viewport",
                 "text-size": 10
@@ -5157,7 +5157,7 @@
                 "symbol-spacing": 200,
                 "text-field": "{ref}",
                 "text-font": [
-                    "KlokanTech Noto Sans Regular"
+                    "Regular"
                 ],
                 "text-rotation-alignment": "viewport",
                 "text-size": 10
@@ -5211,7 +5211,7 @@
                 "symbol-spacing": 200,
                 "text-field": "{ref}",
                 "text-font": [
-                    "KlokanTech Noto Sans Regular"
+                    "Regular"
                 ],
                 "text-rotation-alignment": "viewport",
                 "text-size": 10
@@ -5239,7 +5239,7 @@
                 "text-anchor": "top",
                 "text-field": "{name:latin}\n{name:nonlatin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Regular"
+                    "Regular"
                 ],
                 "text-max-width": 9,
                 "text-offset": [
@@ -5279,7 +5279,7 @@
             "layout": {
                 "text-field": "{name:latin}\n{name:nonlatin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Bold"
+                    "Bold"
                 ],
                 "text-letter-spacing": 0.1,
                 "text-max-width": 9,
@@ -5321,7 +5321,7 @@
             "layout": {
                 "text-field": "{name:latin}\n{name:nonlatin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Regular"
+                    "Regular"
                 ],
                 "text-max-width": 8,
                 "text-size": {
@@ -5361,7 +5361,7 @@
             "layout": {
                 "text-field": "{name:latin}\n{name:nonlatin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Regular"
+                    "Regular"
                 ],
                 "text-max-width": 8,
                 "text-size": {
@@ -5409,7 +5409,7 @@
             "layout": {
                 "text-field": "{name:latin}\n{name:nonlatin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Regular"
+                    "Regular"
                 ],
                 "text-max-width": 8,
                 "text-size": {
@@ -5460,7 +5460,7 @@
                 "text-anchor": "left",
                 "text-field": "{name:latin}\n{name:nonlatin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Regular"
+                    "Regular"
                 ],
                 "text-max-width": 8,
                 "text-offset": [
@@ -5504,7 +5504,7 @@
             "layout": {
                 "text-field": "{name:latin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Bold"
+                    "Bold"
                 ],
                 "text-letter-spacing": 0.1,
                 "text-max-width": 9,
@@ -5558,7 +5558,7 @@
             "layout": {
                 "text-field": "{name:latin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Italic"
+                    "Italic"
                 ],
                 "text-max-width": 6.25,
                 "text-size": {
@@ -5611,7 +5611,7 @@
             "layout": {
                 "text-field": "{name:latin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Bold"
+                    "Bold"
                 ],
                 "text-max-width": 6.25,
                 "text-size": {
@@ -5664,7 +5664,7 @@
             "layout": {
                 "text-field": "{name:latin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Bold"
+                    "Bold"
                 ],
                 "text-max-width": 6.25,
                 "text-size": {
@@ -5717,7 +5717,7 @@
             "layout": {
                 "text-field": "{name:latin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Bold"
+                    "Bold"
                 ],
                 "text-max-width": 6.25,
                 "text-size": {
@@ -5759,7 +5759,7 @@
             "layout": {
                 "text-field": "{name:latin}",
                 "text-font": [
-                    "KlokanTech Noto Sans Bold"
+                    "Bold"
                 ],
                 "text-max-width": 6.25,
                 "text-size": 14,

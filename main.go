@@ -18,14 +18,11 @@ import (
 //go:embed index.html
 var indexPage []byte
 
-//go:embed style.json
+//go:embed styles/positron.json
 var styleJson []byte
 
 //go:embed spec.json
 var specJson []byte
-
-//go:embed osm_liberty_local.json
-var libertyJson []byte
 
 var db *sql.DB
 
@@ -42,10 +39,11 @@ func main() {
 	mux.HandleFunc("/index.html", static("text/html", indexPage))
 	mux.HandleFunc("/style.json", static("text/json", styleJson))
 	mux.HandleFunc("/spec.json", static("text/json", specJson))
-	mux.HandleFunc("/osm_liberty_local.json", static("text/json", libertyJson))
-	mux.HandleFunc("/metadata", metadataHandler)
+	mux.HandleFunc("/metadata.json", metadataHandler)
 	mux.HandleFunc("/tiles/", tileHandler)
+
 	mux.Handle("/fonts/", http.StripPrefix("/fonts/", http.FileServer(http.Dir("fonts"))))
+	mux.Handle("/sprites/", http.StripPrefix("/sprites/", http.FileServer(http.Dir("styles/sprites"))))
 
 	if err := http.ListenAndServe("0.0.0.0:80", handlers.LoggingHandler(os.Stdout, mux)); err != nil {
 		fmt.Println("Error serving: ", err.Error())

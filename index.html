@@ -3,10 +3,11 @@
 
 <head>
     <meta charset='utf-8' />
-    <title>Tilemaker example server</title>
+    <title>Trondheim</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js'></script>
+    <link href='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css' rel='stylesheet' />
+
     <style>
         body {
             margin: 0;
@@ -19,17 +20,6 @@
             bottom: 0;
             width: 100%;
         }
-
-        #refresh {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background-color: white;
-            padding: 5px;
-            border: 1px solid black;
-            font-family: Avenir;
-            cursor: pointer;
-        }
     </style>
 </head>
 
@@ -38,36 +28,33 @@
     <div id='map'></div>
 
     <script>
-        var map;
+        var map = new maplibregl.Map({
+            container: 'map',
+            style: '/style.json', // stylesheet location
+            center: [10.14, 63.42], // starting position [lng, lat]
+            zoom: 3, // starting zoom
+            maxBounds: [[9.78, 63.17], [10.97, 63.56]]
+        });
 
-        fetch("/metadata")
-            .then(response => response.json())
-            .then(data => {
-                var styleURL = window.location.protocol + '//' + window.location.host + '/osm_liberty_local.json';
-                var bounds = data['bounds'].split(',');
-                map = new mapboxgl.Map({
-                    container: 'map', // container id
-                    style: styleURL, // stylesheet location
-                    center: [(Number(bounds[0]) + Number(bounds[2])) / 2,
-                    (Number(bounds[1]) + Number(bounds[3])) / 2], // starting position [lng, lat]
-                    zoom: 13 // starting zoom
-                });
-                map.addControl(new mapboxgl.NavigationControl());
-                map.addControl(new mapboxgl.AttributionControl({
-                    compact: false, customAttribution:
-                        "Style © <a href='http://openmaptiles.org/'>OpenMapTiles</a> | " +
-                        "Data © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>"
-                }));
+        map.addControl(new maplibregl.NavigationControl());
+        map.addControl(new maplibregl.AttributionControl({
+            compact: false, customAttribution:
+                "Style © <a href='http://openmaptiles.org/'>MapTiler</a> | " +
+                "Data © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>"
+        }));
 
-                // -- Comment the following lines out to remove debug UI --
-                map.showTileBoundaries = false;
-                /*  map.addControl(new MapboxInspect({
-                      showInspectButton: true,
-                      showMapPopup: false
-                  }));*/
+        // -- Comment the following lines out to remove debug UI --
+        map.showTileBoundaries = false;
+                /*
+map.addControl(new MaplibreInspect({
+showInspectMap: true
+}));
+*/
+        /*  map.addControl(new MapboxInspect({
+              showInspectButton: false,
+              showMapPopup: true
+          }));*/
                 // -- --
-            }
-            )
     </script>
 
 </body>
