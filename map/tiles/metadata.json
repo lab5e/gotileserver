@@ -4,7 +4,7 @@
     "type": "baselayer",
     "format": "pbf",
     "tiles": [
-        "http://localhost/map/tiles/{z}/{x}/{y}.pbf"
+        "{{.Host}}/map/tiles/{z}/{x}/{y}.pbf"
     ],
     "bounds": [
         9.78,

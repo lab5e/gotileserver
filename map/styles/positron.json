@@ -26,7 +26,7 @@
             "url": "/map/tiles/metadata.json"
         }
     },
-    "sprite": "http://localhost/map/sprites/positron/sprite",
+    "sprite": "{{.Host}}/map/sprites/positron/sprite",
     "glyphs": "/map/fonts/{fontstack}/{range}.pbf",
     "layers": [
         {

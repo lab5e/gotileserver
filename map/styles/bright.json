@@ -51,7 +51,7 @@
             "url": "/map/tiles/metadata.json"
         }
     },
-    "sprite": "http://localhost/map/sprites/bright/sprite",
+    "sprite": "{{.Host}}/map/sprites/bright/sprite",
     "glyphs": "/map/fonts/{fontstack}/{range}.pbf",
     "layers": [
         {

@@ -2,35 +2,48 @@
 <html>
 
 <head>
-    <meta charset='utf-8' />
-    <title>Trondheim</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js'></script>
-    <link href='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css' rel='stylesheet' />
+    <meta charset="utf-8" />
+    <title>Map Demo</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="/map/maplibre/maplibre-gl.js"></script>
+    <link href='/map/maplibre/maplibre-gl.css' rel="stylesheet" />
 
     <style>
         body {
             margin: 0;
             padding: 0;
+            font-family: sans-serif;
         }
 
         #map {
+            top: 30px;
+            width: 100vw;
+            height: calc(100vh - 30px);
+        }
+
+        .style-selector {
             position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
+            top: 5px;
+            left: 10px;
         }
     </style>
 </head>
 
 <body>
-
-    <div id='map'></div>
-
+    <select class="style-selector" id="style">
+        <option value="/map/styles/basic.json">Basic</option>
+        <option value="/map/styles/bright.json">Bright</option>
+        <option value="/map/styles/3d.json">3D</option>
+        <option value="/map/styles/positron.json">Positron</option>
+        <option value="/map/styles/fiord.json">Fiord</option>
+    </select>
+    <div id="map"></div>
     <script>
+
+        // Make sure center and maxBounds reflects the tiles embedded in the server.
         var map = new maplibregl.Map({
             container: 'map',
-            style: '/map/styles/maptiler_basic.json', // stylesheet location
+            style: '/map/styles/basic.json', // stylesheet location, select from 
             center: [10.14, 63.42], // starting position [lng, lat]
             zoom: 3, // starting zoom
             maxBounds: [[9.78, 63.17], [10.97, 63.56]]
@@ -42,12 +55,15 @@
                 "Style © <a href='http://openmaptiles.org/'>MapTiler</a> | " +
                 "Data © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>"
         }));
-
+        map.addControl(new maplibregl.FullscreenControl());
         // -- Comment the following lines out to remove debug UI --
         map.showTileBoundaries = false;
 
+        document.getElementById('style').addEventListener('change', function (event) {
+            const style = event.target.value;
+            map.setStyle(style);
+        });
     </script>
-
 </body>
 
 </html>

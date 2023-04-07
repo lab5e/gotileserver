@@ -1,3 +1,4 @@
-gotileserver
 *.mbtiles
 .DS_Store
+bin/
+

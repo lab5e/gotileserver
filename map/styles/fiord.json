@@ -33,7 +33,7 @@
             "url": "/map/tiles/metadata.json"
         }
     },
-    "sprite": "http://localhost/map/sprites/fiord/sprite",
+    "sprite": "{{.Host}}/map/sprites/fiord/sprite",
     "glyphs": "/map/fonts/{fontstack}/{range}.pbf",
     "layers": [
         {

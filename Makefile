@@ -1,6 +1,9 @@
 .PHONY: all tiles 
 all: build
 
+build:
+	cd example && go build -o ../bin/example
+	
 # Run brew install osmium-tool on macOS to download this tool
 OSMIUM := $(shell which osmium)
 # Build from sources at https://github.com/systemed/tilemaker
