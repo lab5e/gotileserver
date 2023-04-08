@@ -122,7 +122,15 @@ func tileHandler(w http.ResponseWriter, r *http.Request) {
 func styleHandler(w http.ResponseWriter, r *http.Request) {
 	elems := strings.Split(r.URL.Path, "/")
 	if len(elems) != 4 {
-		w.WriteHeader(http.StatusBadRequest)
+		// Check if this exists elsewhere in the file system
+		buf, err := styles.ReadFile(r.URL.Path[1:])
+		if err != nil {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+		w.Header().Add("Content-Type", http.DetectContentType(buf))
+		w.Header().Add("Content-Length", fmt.Sprintf("%d", len(buf)))
+		w.Write(buf)
 		return
 	}
 	templateName := elems[3]

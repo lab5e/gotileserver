@@ -9,10 +9,10 @@
     "sources": {
         "openmaptiles": {
             "type": "vector",
-            "url": "/map/tiles/metadata.json"
+            "url": "{{.Host}}/map/tiles/metadata.json"
         }
     },
-    "glyphs": "/map/fonts/{fontstack}/{range}.pbf",
+    "glyphs": "{{.Host}}/map/fonts/{fontstack}/{range}.pbf",
     "layers": [
         {
             "id": "background",

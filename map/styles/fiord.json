@@ -30,11 +30,11 @@
     "sources": {
         "openmaptiles": {
             "type": "vector",
-            "url": "/map/tiles/metadata.json"
+            "url": "{{.Host}}/map/tiles/metadata.json"
         }
     },
-    "sprite": "{{.Host}}/map/sprites/fiord/sprite",
-    "glyphs": "/map/fonts/{fontstack}/{range}.pbf",
+    "sprite": "{{.Host}}/map/styles/sprites/fiord/sprite",
+    "glyphs": "{{.Host}}/map/fonts/{fontstack}/{range}.pbf",
     "layers": [
         {
             "id": "background",
