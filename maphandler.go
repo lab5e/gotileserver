@@ -29,15 +29,11 @@ type hostTemplate struct {
 	Host string
 }
 
-var templateData hostTemplate
-
 var templates map[string]*template.Template
 
 // RegisterHandler registers handlers for the /map path in the mux. Since the styles and spec files require
-// a fair bit of massaging to work. Omit the trailing slash for the hostname (ie. "http://localhost")
-func RegisterHandler(mux *http.ServeMux, hostName string) error {
-	templateData.Host = hostName
-
+// a fair bit of massaging to work.
+func RegisterHandler(mux *http.ServeMux) error {
 	templates = make(map[string]*template.Template)
 
 	var err error
@@ -97,7 +93,7 @@ func tileHandler(w http.ResponseWriter, r *http.Request) {
 		// This is the metadata; report appropriate content type
 		w.Header().Add("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		if err := tmpl.Execute(w, templateData); err != nil {
+		if err := tmpl.Execute(w, getTemplateData(r)); err != nil {
 			log.Printf("Error running metadata template: %v", err)
 		}
 		return
@@ -142,7 +138,25 @@ func styleHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Add("Content-Type", "application/json")
-	if err := tmpl.ExecuteTemplate(w, templateName, templateData); err != nil {
+	if err := tmpl.ExecuteTemplate(w, templateName, getTemplateData(r)); err != nil {
 		log.Printf("Error running style template: %v", err)
+	}
+}
+
+func getTemplateData(r *http.Request) hostTemplate {
+	// Check if the origin header is set; use that one.
+	host := r.Header.Get("Origin")
+	if host != "" && host != "null" {
+		return hostTemplate{
+			Host: host,
+		}
+	}
+	// This might be a direct request; check for Host + TLS config
+	prefix := "http://"
+	if r.TLS != nil {
+		prefix = "https://"
+	}
+	return hostTemplate{
+		Host: prefix + r.Host,
 	}
 }

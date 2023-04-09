@@ -11,7 +11,7 @@ import (
 func main() {
 	mux := http.NewServeMux()
 
-	if err := gotileserver.RegisterHandler(mux, "http://localhost:8080"); err != nil {
+	if err := gotileserver.RegisterHandler(mux); err != nil {
 		log.Fatalf("error registering handler: %v", err)
 	}
 
