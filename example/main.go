@@ -11,7 +11,8 @@ import (
 func main() {
 	mux := http.NewServeMux()
 
-	if err := gotileserver.RegisterHandler(mux); err != nil {
+	// The host override can be set to an empty string since everything is handled by the server
+	if err := gotileserver.RegisterHandler(mux, ""); err != nil {
 		log.Fatalf("error registering handler: %v", err)
 	}
 

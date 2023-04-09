@@ -29,11 +29,15 @@ type hostTemplate struct {
 	Host string
 }
 
+var overrideHost string = ""
+
 var templates map[string]*template.Template
 
 // RegisterHandler registers handlers for the /map path in the mux. Since the styles and spec files require
-// a fair bit of massaging to work.
-func RegisterHandler(mux *http.ServeMux) error {
+// a fair bit of massaging to work. The host override string
+func RegisterHandler(mux *http.ServeMux, hostOverride string) error {
+	overrideHost = hostOverride
+
 	templates = make(map[string]*template.Template)
 
 	var err error
@@ -143,7 +147,16 @@ func styleHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Make an attempt to guess the appropriate host name to use in the style templates. Because Reasons (tm) the
+// styles need a complete URL for the resources and the front-end libraries gets *very* confused whent the
+// URLs point to different places. Return the override setting if it is set (this is probably preferred if
+// you have anything but the most trivial set-up)
 func getTemplateData(r *http.Request) hostTemplate {
+	if overrideHost != "" {
+		return hostTemplate{
+			Host: overrideHost,
+		}
+	}
 	// Check if the origin header is set; use that one.
 	host := r.Header.Get("Origin")
 	if host != "" && host != "null" {
