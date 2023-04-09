@@ -22,21 +22,37 @@
         }
 
         .style-selector {
+            width: 200px;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: row;
             position: absolute;
             top: 5px;
             left: 10px;
+        }
+
+        .cap {
+            width: 200px;
+            text-align: right;
         }
     </style>
 </head>
 
 <body>
-    <select class="style-selector" id="style">
-        <option value="/map/styles/basic.json">Basic</option>
-        <option value="/map/styles/bright.json">Bright</option>
-        <option value="/map/styles/3d.json">3D</option>
-        <option value="/map/styles/positron.json">Positron</option>
-        <option value="/map/styles/fiord.json">Fiord</option>
-    </select>
+    <div class="header">
+        <div class="cap">Style:</div>
+        <select class="style-selector" id="style">
+            <option value="/map/styles/basic.json">Basic</option>
+            <option value="/map/styles/bright.json">Bright</option>
+            <option value="/map/styles/3d.json">3D</option>
+            <option value="/map/styles/positron.json">Positron</option>
+            <option value="/map/styles/fiord.json">Fiord</option>
+        </select>
+        <div class="cap">Latitude/Longitude: </div>
+        <div id="latlon">[0.0, 0.0]</div>
+    </div>
     <div id="map"></div>
     <script>
 
@@ -49,6 +65,8 @@
             maxBounds: [[9.78, 63.17], [10.97, 63.56]]
         });
 
+        var marker = null;
+
         map.addControl(new maplibregl.NavigationControl());
         map.addControl(new maplibregl.AttributionControl({
             compact: false, customAttribution:
@@ -58,7 +76,16 @@
         map.addControl(new maplibregl.FullscreenControl());
         // -- Comment the following lines out to remove debug UI --
         map.showTileBoundaries = false;
-
+        map.on('click', function (e) {
+            document.getElementById('latlon').innerText = "[" + String(e.lngLat.lng) + ", " + String(e.lngLat.lat) + "]";
+            if (!marker) {
+                marker = new maplibregl.Marker()
+                marker.setLngLat([e.lngLat.lng, e.lngLat.lat])
+                marker.addTo(map);
+            } else {
+                marker.setLngLat([e.lngLat.lng, e.lngLat.lat])
+            }
+        });
         document.getElementById('style').addEventListener('change', function (event) {
             const style = event.target.value;
             map.setStyle(style);
