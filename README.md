@@ -7,6 +7,11 @@ technique and [OpenMapTiles](https://openmaptiles.org) is a vector-based solutio
 The styling is... interesting... There's a lot of hard coded references to external resources so the styles
 included in this project has been massaged to point to both the proper tile data and local resources.
 
+
+## Using custom tilers
+
+The library includes a sample set of tiles from a different library. To add your own tiles follow the guidelines below.
+
 ## Building the tiles
 
 The tiles can be rebuilt in a few minutes (a more elaborate description is at https://blog.kleunen.nl/blog/tilemaker-generate-map). 
