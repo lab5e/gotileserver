@@ -55,41 +55,53 @@
     </div>
     <div id="map"></div>
     <script>
+        async function getMetadata() {
+            const response = await fetch("/map/tiles/metadata.json");
+            return response.json();
+        }
 
-        // Make sure center and maxBounds reflects the tiles embedded in the server.
-        var map = new maplibregl.Map({
-            container: 'map',
-            style: '/map/styles/basic.json', // stylesheet location, select from 
-            center: [10.14, 63.42], // starting position [lng, lat]
-            zoom: 3, // starting zoom
-            maxBounds: [[9.78, 63.17], [10.97, 63.56]]
+        // Fetch the metadata and set maxBounds and center for the map
+
+        getMetadata().then((metadata) => {
+            let bounds = metadata.bounds;
+            let lonCenter = (bounds[2] + bounds[0]) / 2;
+            let latCenter = (bounds[3] + bounds[2]) / 2;
+            // Make sure center and maxBounds reflects the tiles embedded in the server.
+            var map = new maplibregl.Map({
+                container: 'map',
+                style: '/map/styles/basic.json', // stylesheet location, select from 
+                center: [lonCenter, latCenter], // starting position [lng, lat]
+                zoom: 3, // starting zoom
+                maxBounds: [[bounds[0], bounds[1]], [bounds[2], bounds[3]]]
+            });
+
+            var marker = null;
+
+            map.addControl(new maplibregl.NavigationControl());
+            map.addControl(new maplibregl.AttributionControl({
+                compact: false, customAttribution:
+                    "Style © <a href='http://openmaptiles.org/'>MapTiler</a> | " +
+                    "Data © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>"
+            }));
+            map.addControl(new maplibregl.FullscreenControl());
+            // -- Comment the following lines out to remove debug UI --
+            map.showTileBoundaries = false;
+            map.on('click', function (e) {
+                document.getElementById('latlon').innerText = "[" + String(e.lngLat.lng) + ", " + String(e.lngLat.lat) + "]";
+                if (!marker) {
+                    marker = new maplibregl.Marker()
+                    marker.setLngLat([e.lngLat.lng, e.lngLat.lat])
+                    marker.addTo(map);
+                } else {
+                    marker.setLngLat([e.lngLat.lng, e.lngLat.lat])
+                }
+            });
+            document.getElementById('style').addEventListener('change', function (event) {
+                const style = event.target.value;
+                map.setStyle(style);
+            });
         });
 
-        var marker = null;
-
-        map.addControl(new maplibregl.NavigationControl());
-        map.addControl(new maplibregl.AttributionControl({
-            compact: false, customAttribution:
-                "Style © <a href='http://openmaptiles.org/'>MapTiler</a> | " +
-                "Data © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>"
-        }));
-        map.addControl(new maplibregl.FullscreenControl());
-        // -- Comment the following lines out to remove debug UI --
-        map.showTileBoundaries = false;
-        map.on('click', function (e) {
-            document.getElementById('latlon').innerText = "[" + String(e.lngLat.lng) + ", " + String(e.lngLat.lat) + "]";
-            if (!marker) {
-                marker = new maplibregl.Marker()
-                marker.setLngLat([e.lngLat.lng, e.lngLat.lat])
-                marker.addTo(map);
-            } else {
-                marker.setLngLat([e.lngLat.lng, e.lngLat.lat])
-            }
-        });
-        document.getElementById('style').addEventListener('change', function (event) {
-            const style = event.target.value;
-            map.setStyle(style);
-        });
     </script>
 </body>
 

@@ -13,9 +13,6 @@ import (
 //go:embed map/index.html
 var indexPage []byte
 
-//go:embed map/tiles
-var tiles embed.FS
-
 //go:embed map/fonts
 var fonts embed.FS
 
@@ -29,15 +26,18 @@ type hostTemplate struct {
 	Host string
 }
 
+// Assigned from external source
+var tiles embed.FS
+
 var overrideHost string = ""
 
 var templates map[string]*template.Template
 
 // RegisterHandler registers handlers for the /map path in the mux. Since the styles and spec files require
 // a fair bit of massaging to work. The host override string
-func RegisterHandler(mux *http.ServeMux, hostOverride string) error {
+func RegisterHandler(mux *http.ServeMux, hostOverride string, tileSource embed.FS) error {
 	overrideHost = hostOverride
-
+	tiles = tileSource
 	templates = make(map[string]*template.Template)
 
 	var err error

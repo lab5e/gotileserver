@@ -6,13 +6,14 @@ import (
 	"net/http"
 
 	"github.com/lab5e/gotileserver"
+	osmsampletiles "github.com/lab5e/osm-sample-tiles"
 )
 
 func main() {
 	mux := http.NewServeMux()
 
 	// The host override can be set to an empty string since everything is handled by the server
-	if err := gotileserver.RegisterHandler(mux, ""); err != nil {
+	if err := gotileserver.RegisterHandler(mux, "", osmsampletiles.SampleOSMTiles()); err != nil {
 		log.Fatalf("error registering handler: %v", err)
 	}
 
