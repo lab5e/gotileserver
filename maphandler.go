@@ -4,6 +4,7 @@ import (
 	"embed" // For embedding the index page
 	"encoding/hex"
 	"fmt"
+	"io/fs"
 	"log"
 	"net/http"
 	"strings"
@@ -27,7 +28,7 @@ type hostTemplate struct {
 }
 
 // Assigned from external source
-var tiles embed.FS
+var tiles fs.FS
 
 var overrideHost string = ""
 
@@ -35,7 +36,7 @@ var templates map[string]*template.Template
 
 // RegisterHandler registers handlers for the /map path in the mux. Since the styles and spec files require
 // a fair bit of massaging to work. The host override string
-func RegisterHandler(mux *http.ServeMux, hostOverride string, tileSource embed.FS) error {
+func RegisterHandler(mux *http.ServeMux, hostOverride string, tileSource fs.FS) error {
 	overrideHost = hostOverride
 	tiles = tileSource
 	templates = make(map[string]*template.Template)
@@ -103,7 +104,7 @@ func tileHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data, err = tiles.ReadFile(fileName)
+	data, err = fs.ReadFile(tiles, fileName)
 	if err != nil {
 		data, err = hex.DecodeString("1F8B0800FA78185E000393E2E3628F8F4FCD2D28A9D46850A86002006471443610000000")
 		if err != nil {
